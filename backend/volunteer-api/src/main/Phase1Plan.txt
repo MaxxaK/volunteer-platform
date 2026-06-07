@@ -1,0 +1,30 @@
+You should keep your getters and setters inside your User model class and create brand new, separate getters and setters inside your DTO.
+Do not move them or delete them from the model. Hibernate needs the getters and setters in your User model to interact with the database, while Spring Boot needs a separate set of getters and setters in your DTO to read incoming web requests.
+Here is the exact, step-by-step roadmap to get a basic user creation and registration pipeline working entirely on your backend, using Postman or an integrated development environment to test it before linking your React interface.
+## Phase 1: Set Up the Data Flow Contract
+
+   1. Design the Request Body (DTO): Define a clean DTO class containing only three bare properties: username, email, and password. Add getters and setters specifically for this class.
+   2. Review the Entity Structure (Model): Verify that your User class has a public no-arg constructor, a custom 3-parameter constructor (accepting username, email, and password), and a functioning @PrePersist method to capture the timestamp.
+
+## Phase 2: Open Communication with the Database
+
+   1. Declare the Data Access Interface (Repository): Create a repository interface that extends JPA's data handler.
+   2. Draft Safety Validations: Inside that interface, declare lookup check signatures to inspect if a unique username or email already occupies a row in your PostgreSQL tables.
+
+## Phase 3: Build the Application Engine
+
+   1. Coordinate Business Rules (Service): Create a service class and pass your repository into it via its constructor.
+   2. Program Registration Logic: Write a registration method that receives your DTO, executes the unique data validation lookups, maps those clean inputs over into a fresh User model instance, and tells the repository to commit it to the database.
+
+## Phase 4: Open the Web Portal
+
+   1. Expose the Endpoint (Controller): Write a rest controller class and plug your service layer into it.
+   2. Map the HTTP Route: Set up a dedicated POST routing endpoint that intercepts web traffic, translates incoming data directly into your DTO variable, and feeds it into your service registration function.
+
+## Phase 5: Execute an Isolated Test
+
+   1. Launch the Application: Start your Spring Boot application server and watch the console logs to confirm Hibernate detects your model and successfully logs onto your PostgreSQL database instance.
+   2. Simulate a Request: Fire up an API client testing application (like Postman or Insomnia) or run a command-line curl request. Send a raw JSON string containing a mock username, email, and password to your endpoint, then run a SELECT * FROM users; script directly inside your PostgreSQL console to verify the new account and its automatic creation timestamp saved correctly.
+
+Which specific phase of this workflow would you like to deep dive into and write the code for first?
+
