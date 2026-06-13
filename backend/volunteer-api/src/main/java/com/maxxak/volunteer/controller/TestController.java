@@ -2,8 +2,11 @@ package com.maxxak.volunteer.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.maxxak.volunteer.dto.RegisterRequest;
 import com.maxxak.volunteer.model.User;
 import com.maxxak.volunteer.service.UserService;
 
@@ -22,12 +25,17 @@ public class TestController {
         return "Backend Works";
     }
 
-    @GetMapping("/api/test-user")
-    public String testUser(){
-        User user = new User("test-user", "test-email@gmail.com", "password");
+    // @GetMapping("/api/test-user")
+    // public String testUser(){
+    //     User user = new User("test-user", "test-email@gmail.com", "password");
 
-        userService.createUser(user);
+    //     userService.createUser(user);
 
-        return "user created";
+    //     return "user created";
+    // }
+
+    @PostMapping("/api/test-register")
+    public User testRegister(@RequestBody RegisterRequest request){
+        return userService.register(request);
     }
 }

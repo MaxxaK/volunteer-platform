@@ -28,15 +28,15 @@ public class UserService {
         String email = newRequest.getEmail();
         String password = newRequest.getPass();
 
-        if(validUsername(username)){
+        if(!validUsername(username)){
             throw new RuntimeException("Invalid username");
         } 
         
-        if(validEmail(email)){
+        if(!validEmail(email)){
             throw new RuntimeException("Invalid email");
         }
         
-        if(validPassword(password)){
+        if(!validPassword(password)){
             throw new RuntimeException("Invalid password");
         }
         
@@ -76,7 +76,7 @@ public class UserService {
     public boolean validEmail(String email){
         boolean validEmail = true;
 
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        String emailRegex = "^[a-zA-Z0-9_+&*\\-]+(?:\\.[a-zA-Z0-9_+&*\\-]+)*@(?:[a-zA-Z0-9\\-]+\\.)+[a-zA-Z]{2,7}$";
 
         if(!email.matches(emailRegex))
             validEmail = false;
