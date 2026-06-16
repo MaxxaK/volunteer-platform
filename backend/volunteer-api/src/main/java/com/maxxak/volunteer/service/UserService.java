@@ -7,6 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.maxxak.volunteer.dto.RegisterRequest;
+import com.maxxak.volunteer.exception.EmailAlreadyExistsException;
+import com.maxxak.volunteer.exception.InvalidRegistrationException;
+import com.maxxak.volunteer.exception.UsernameAlreadyExistsException;
 import com.maxxak.volunteer.model.User;
 import com.maxxak.volunteer.repository.UserRepository;
 
@@ -29,22 +32,22 @@ public class UserService {
         String password = newRequest.getPass();
 
         if(!validUsername(username)){
-            throw new RuntimeException("Invalid username");
+            throw new InvalidRegistrationException("Invalid username");
         } 
         
         if(!validEmail(email)){
-            throw new RuntimeException("Invalid email");
+            throw new InvalidRegistrationException("Invalid email");
         }
         
         if(!validPassword(password)){
-            throw new RuntimeException("Invalid password");
+            throw new InvalidRegistrationException("Invalid password");
         }
         
         if(usernameExists(username)){
-            throw new RuntimeException("username already exists"); 
+            throw new UsernameAlreadyExistsException("username already exists"); 
         }
         if(emailExists(email)){
-            throw new RuntimeException("email already in use");
+            throw new EmailAlreadyExistsException("email already in use");
         }
 
         String hashedPassword = passwordEncoder.encode(password);
