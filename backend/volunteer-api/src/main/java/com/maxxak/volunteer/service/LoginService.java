@@ -22,7 +22,6 @@ public class LoginService {
     }
 
     public User login(LoginRequest newRequest){
-
         String email = newRequest.getEmail();
         String password = newRequest.getPass();
         Optional<User> userOptional = USER_REPO.findByEmail(email);

@@ -1,17 +1,40 @@
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
 
-function App() {
+// function App() {
 
-  const [message, setMessage] = useState("loading...");
+//   const [message, setMessage] = useState("loading...");
 
-  useEffect(() => {
-    fetch("http://localhost:8080/api/test")
-      .then(res => res.text())
-      .then(data => console.log("Response:", data))
-      .catch(err => console.error("Fetch error:", err));
-  }, []);
+//   useEffect(() => {
+//     fetch("http://localhost:8080/api/test")
+//       .then(res => res.text())
+//       .then(data => console.log("Response:", data))
+//       .catch(err => console.error("Fetch error:", err));
+//   }, []);
 
-  return <h1>React is working</h1>;
+//   return <h1>React is working</h1>;
+// }
+
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import { useState } from "react";
+
+export default function App() {
+
+    const [showLogin, setShowLogin] = useState(true);
+
+    return (
+        <>
+            <button onClick={() => setShowLogin(true)}>
+                Login
+            </button>
+
+            <button onClick={() => setShowLogin(false)}>
+                Register
+            </button>
+
+            {showLogin ? <Login /> : <Register />}
+        </>
+    );
 }
 
 // function App() {
@@ -34,4 +57,4 @@ function App() {
 //   return <h1>{message}</h1>;
 // }
 
-export default App;
+//export default App;
