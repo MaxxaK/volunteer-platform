@@ -14,28 +14,28 @@
 //   return <h1>React is working</h1>;
 // }
 
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import { useState } from "react";
+// import Login from "./pages/Login";
+// import Register from "./pages/Register";
+// import { useState } from "react";
 
-export default function App() {
+// export default function App() {
 
-    const [showLogin, setShowLogin] = useState(true);
+//     const [showLogin, setShowLogin] = useState(true);
 
-    return (
-        <>
-            <button onClick={() => setShowLogin(true)}>
-                Login
-            </button>
+//     return (
+//         <>
+//             <button onClick={() => setShowLogin(true)}>
+//                 Login
+//             </button>
 
-            <button onClick={() => setShowLogin(false)}>
-                Register
-            </button>
+//             <button onClick={() => setShowLogin(false)}>
+//                 Register
+//             </button>
 
-            {showLogin ? <Login /> : <Register />}
-        </>
-    );
-}
+//             {showLogin ? <Login /> : <Register />}
+//         </>
+//     );
+// }
 
 // function App() {
 //   return <h1>React is working</h1>;
@@ -58,3 +58,18 @@ export default function App() {
 // }
 
 //export default App;
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
+export default function App() {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+            </Routes>
+        </BrowserRouter>
+    );
+}
