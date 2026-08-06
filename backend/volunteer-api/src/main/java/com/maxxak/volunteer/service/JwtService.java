@@ -7,6 +7,7 @@ import javax.crypto.SecretKey;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.maxxak.volunteer.model.User;
 
@@ -59,6 +60,16 @@ public class JwtService {
 
         }
         return false;
+    }
+
+    //overloaded method for JwtFilter
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        try {
+            return extractUsername(token).equals(userDetails.getUsername())
+                    && extractExpiration(token).after(new Date());
+        } catch (JwtException e) {
+            return false;
+        }
     }
 
 }

@@ -14,7 +14,7 @@ import com.maxxak.volunteer.model.User;
 import com.maxxak.volunteer.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService{
     
     private final UserRepository USER_REPO;
     @Autowired
@@ -105,4 +105,5 @@ public class UserService {
     public void createUser(User newUser){
         USER_REPO.save(newUser);
     }
+
 }

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.maxxak.volunteer.dto.LoginRequest;
 import com.maxxak.volunteer.dto.RegisterRequest;
 import com.maxxak.volunteer.model.User;
+import com.maxxak.volunteer.service.JwtService;
 import com.maxxak.volunteer.service.LoginService;
 import com.maxxak.volunteer.service.UserService;
-import com.maxxak.volunteer.service.JwtService;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -43,8 +43,6 @@ public class AuthController {
     public AuthenticationResponse login(@RequestBody LoginRequest request){
         User user = loginService.login(request);
         String token = jwtService.generateToken(user);
-        System.out.println(jwtService.extractUsername(token));
-        System.out.println(jwtService.isTokenValid(token, user.getEmail()));
         return new AuthenticationResponse(token);
         //return loginService.login(request);
     }
